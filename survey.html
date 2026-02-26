@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#37d6a8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Nur" />
+    <title>Nur — Опрос и советы</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="survey">
+    <header class="container header">
+      <a class="brand" href="./index.html" aria-label="На главную">
+        <div class="logo" aria-hidden="true">N</div>
+        <div>
+          <div class="title">Nur</div>
+          <div class="subtitle">Гигиена рта и зубов</div>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Разделы">
+        <a href="./index.html" data-nav="home">Главная</a>
+        <a href="./profile.html" data-nav="profile">Профиль</a>
+        <a href="./survey.html" data-nav="survey">Опрос и советы</a>
+        <a href="./history.html" data-nav="history">История</a>
+      </nav>
+
+      <div class="headerRight">
+        <div id="userBadge" class="pill" hidden></div>
+        <button id="themeToggle" class="btn btnGhost" type="button">Тема</button>
+        <button id="resetAllBtn" class="btn btnGhost" type="button">Сбросить всё</button>
+      </div>
+    </header>
+
+    <main class="container layout">
+      <section class="card" aria-labelledby="surveyTitle">
+        <div class="cardHeader">
+          <h1 id="surveyTitle" class="h1">Опрос</h1>
+          <div class="muted">Ответьте и получите советы</div>
+        </div>
+
+        <div class="row" aria-label="Оплата советов" style="justify-content:space-between; margin-bottom:10px">
+          <div class="muted small">Кошелёк: <strong id="walletBalance">0</strong></div>
+          <div class="pill" title="Списывается при получении советов">Советы: −<span id="adviceCost">0</span></div>
+        </div>
+
+        <form id="surveyForm" class="form" novalidate>
+          <label class="field">
+            <span>Ваш вопрос (необязательно)</span>
+            <input id="questionInput" name="question" maxlength="140" placeholder="Например: болит десна при чистке" />
+          </label>
+
+          <div class="twoCol">
+            <label class="field">
+              <span>Чистите зубы в день</span>
+              <select id="brushingInput" name="brushing">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3+</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Нить / ёршики</span>
+              <select id="flossInput" name="floss">
+                <option value="no">нет</option>
+                <option value="sometimes" selected>иногда</option>
+                <option value="yes">да</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Ополаскиватель</span>
+              <select id="mouthwashInput" name="mouthwash">
+                <option value="no" selected>нет</option>
+                <option value="yes">да</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Сладкое/газировка</span>
+              <select id="sugarInput" name="sugar">
+                <option value="low">редко</option>
+                <option value="medium" selected>иногда</option>
+                <option value="high">часто</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Кровоточивость дёсен</span>
+              <select id="bleedingInput" name="bleeding">
+                <option value="no" selected>нет</option>
+                <option value="sometimes">иногда</option>
+                <option value="often">часто</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Чувствительность</span>
+              <select id="sensitivityInput" name="sensitivity">
+                <option value="none" selected>нет</option>
+                <option value="mild">лёгкая</option>
+                <option value="strong">сильная</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Курение</span>
+              <select id="smokeInput" name="smoke">
+                <option value="no" selected>нет</option>
+                <option value="yes">да</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Стоматолог (месяцев назад)</span>
+              <input id="dentistInput" name="dentistMonths" type="number" min="0" max="240" placeholder="Например: 12" />
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Главная цель</span>
+            <select id="goalInput" name="goal">
+              <option value="prevent" selected>профилактика кариеса</option>
+              <option value="gum">здоровье дёсен</option>
+              <option value="fresh">свежее дыхание</option>
+              <option value="white">осветление эмали</option>
+              <option value="sensitivity">уменьшить чувствительность</option>
+            </select>
+          </label>
+
+          <div class="row">
+            <button class="btn" type="submit">Получить рекомендации</button>
+            <button id="clearFormBtn" class="btn btnGhost" type="button">Очистить</button>
+          </div>
+
+          <div id="surveyMsg" class="msg" role="status" aria-live="polite" hidden></div>
+        </form>
+      </section>
+
+      <section class="card" aria-labelledby="adviceTitle">
+        <div class="cardHeader">
+          <h2 id="adviceTitle">Советы</h2>
+          <div class="muted">Под ваши ответы</div>
+        </div>
+
+        <div class="disclaimer" role="note">
+          <strong>Важно:</strong> это общие рекомендации, не диагноз. Если есть сильная боль, отёк, температура, гной, травма, или кровь из дёсен не проходит — обратитесь к стоматологу.
+        </div>
+
+        <div id="adviceEmpty" class="muted">Заполните опрос и нажмите “Получить рекомендации”.</div>
+
+        <div id="adviceBlock" hidden>
+          <div class="adviceGrid">
+            <div>
+              <h3 class="h3">Что делать</h3>
+              <ul id="tipsList" class="list"></ul>
+            </div>
+            <div>
+              <h3 class="h3">Следующие шаги</h3>
+              <ul id="nextList" class="list"></ul>
+            </div>
+          </div>
+
+          <div id="warningBlock" class="warning" hidden>
+            <div class="warningTitle">Когда лучше не ждать</div>
+            <ul id="warningsList" class="list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <div class="muted small">© Nur — локальный прототип</div>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

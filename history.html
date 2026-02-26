@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#37d6a8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Nur" />
+    <title>Nur — История</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="history">
+    <header class="container header">
+      <a class="brand" href="./index.html" aria-label="На главную">
+        <div class="logo" aria-hidden="true">N</div>
+        <div>
+          <div class="title">Nur</div>
+          <div class="subtitle">Гигиена рта и зубов</div>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Разделы">
+        <a href="./index.html" data-nav="home">Главная</a>
+        <a href="./profile.html" data-nav="profile">Профиль</a>
+        <a href="./survey.html" data-nav="survey">Опрос и советы</a>
+        <a href="./history.html" data-nav="history">История</a>
+      </nav>
+
+      <div class="headerRight">
+        <div id="userBadge" class="pill" hidden></div>
+        <button id="themeToggle" class="btn btnGhost" type="button">Тема</button>
+        <button id="resetAllBtn" class="btn btnGhost" type="button">Сбросить всё</button>
+      </div>
+    </header>
+
+    <main class="container layout">
+      <section class="card" aria-labelledby="historyTitle">
+        <div class="cardHeader">
+          <h1 id="historyTitle" class="h1">История</h1>
+          <div class="muted">Ваши запросы, ответы и рекомендации</div>
+        </div>
+
+        <div class="row">
+          <button id="clearHistoryBtn" class="btn btnGhost" type="button">Очистить историю</button>
+        </div>
+
+        <div id="historyEmpty" class="muted">Пока пусто.</div>
+        <div id="historyList" class="history"></div>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <div class="muted small">© Nur — локальный прототип</div>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
